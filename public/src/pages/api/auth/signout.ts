@@ -5,4 +5,6 @@ export const GET: APIRoute = async ({ redirect, cookies }) => {
         path: "/",
     });
     return redirect("/");
+    //refrescar la pagina
+    window.location.reload();
 };

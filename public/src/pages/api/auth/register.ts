@@ -15,8 +15,12 @@ export const POST: APIRoute = async ({ request }) => {
     const password = formData.get("password")?.toString();
     const birthdate = formData.get("birthdate")?.toString();
     const role = formData.get("role")?.toString();
+    const matricula = formData.get("matricula")?.toString();
+    const lugarDeOrigen = formData.get("lugarDeOrigen")?.toString();
+    const infoExtra = formData.get("infoExtra")?.toString();
+    
 
-    if (!email || !password || !name || !role || !lastName || !dni || !birthdate) {
+    if (!email || !password || !name || !role || !lastName || !dni || !birthdate || !matricula || !lugarDeOrigen || !infoExtra ) {
         return new Response(
             JSON.stringify({ error: "Datos faltantes" }),
             { status: 400, headers: { "Content-Type": "application/json" } }
@@ -40,6 +44,9 @@ export const POST: APIRoute = async ({ request }) => {
             birthdate,
             role,
             profileImageUrl: null,
+            matricula,
+            lugarDeOrigen,
+            infoExtra,
         });
 
         return new Response(

@@ -47,15 +47,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
     // Establecer la cookie de sesión en las cookies del navegador
     cookies.set("__session", sessionCookie, { path: "/" });
 
-    // Redirigir al usuario según su rol
-    if (userData.role === "admin") {
-        // Si es un administrador, redirigir al dashboard del administrador
-        return redirect("/roles/dashboardAdmin");
-    } else if (userData.role === "user") {
-        // Si es un usuario regular, redirigir al dashboard del usuario
-        return redirect("/roles/dashboardUser");
-    } else {
-        // En caso contrario, redirigir al dashboard del invitado
-        return redirect("/roles/dashboardGuest");
-    }
+    // Redirigir al usuario al home
+    return redirect("/");
 };
+   
