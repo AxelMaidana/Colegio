@@ -9,6 +9,11 @@ import { checkUserRole } from "../pages/api/auth/roleBasedRedirect";
 //Verificar el rol del usuario y obtener su información
 const userData = await checkUserRole(Astro, ["admin", "user", "guest"]);
 
+// Si no está autenticado, redirigir
+if (!userData) {
+  return Astro.redirect("/signin");
+}
+
 interface Props {
 	title: string;
 }

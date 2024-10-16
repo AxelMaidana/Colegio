@@ -1,0 +1,28 @@
+---
+import Layout from "../../Layouts/Layout.astro";
+import { checkUserRole } from "../api/auth/roleBasedRedirect";
+
+const userData = await checkUserRole(Astro, ["user"]);
+
+const allowedRoles = ["user"];
+
+if (!userData || !allowedRoles.includes(userData.role)) {
+  return Astro.redirect("/signin"); // o cualquier página que desees
+}
+---
+
+<Layout title="User">
+    <div class="flex justify-center m-6 text-center">
+
+        <section>
+            <h1 class="text-blue-500 font-bold text-3xl m-6">Panel del {userData.role}</h1>
+            <p class="text-center">Hola <span class="font-bold uppercase">{userData.name}</span>, ¡bienvenido a la plataforma de Invitados!</p>
+            <p class="text-center">Eres un <span class="font-bold uppercase">{userData.role}</span> y puedes acceder a las siguientes opciones:</p>
+            <div class="p-4 rounded-lg shadow-md">
+                <ul class="font-semibold list-disc pl-8">
+                    <li>Configuración de perfil de user</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</Layout>

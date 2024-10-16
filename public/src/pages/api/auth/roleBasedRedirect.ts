@@ -22,8 +22,7 @@ export async function checkUserRole(Astro: any, allowedRoles: string[]) {
 
         // Verificación de los datos del usuario y redirección a la página de inicio de sesión si no se cumplen los requisitos:
         if (!userData || !allowedRoles.includes(userData.role)) {
-            // Destruir la cookie antes de redirigir
-            Astro.cookies.delete("__session"); // Eliminar la cookie de sesión
+       
             return Astro.redirect("/signin");
         }
 
@@ -32,8 +31,6 @@ export async function checkUserRole(Astro: any, allowedRoles: string[]) {
     } catch (error) {
         console.error("Error verifying session cookie or fetching user data:", error);
         
-        // Destruir la cookie en caso de error
-        Astro.cookies.delete("__session"); // Eliminar la cookie de sesión
         return Astro.redirect("/signin");
     }
 }

@@ -1,0 +1,17 @@
+---
+import Pastilla from "../../components/ActAcademicas/detalle/Pastilla.astro";
+import Layout from "../../Layouts/Layout.astro";
+import { checkUserRole } from "../api/auth/roleBasedRedirect";
+
+const userData = await checkUserRole(Astro, ["admin"]);
+
+const allowedRoles = ["admin"];
+
+if (!userData || !allowedRoles.includes(userData.role)) {
+  return Astro.redirect("/signin"); // o cualquier página que desees
+}
+---
+
+<Layout title="Gestor de usuarios">
+    <Pastilla title="Gestor de usuarios"/>
+</Layout>
